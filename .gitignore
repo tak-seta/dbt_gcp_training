@@ -1,0 +1,8 @@
+target/
+dbt_modules/
+logs/
+**/.DS_Store
+profiles.yml
+.user.yml
+poetry.lock
+sa_keyfile.json
