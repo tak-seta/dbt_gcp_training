@@ -8,3 +8,9 @@ variable "region" {
   nullable = false
   default  = "asia-northeast1"
 }
+
+variable "container_image" {
+  description = "docker container image"
+  type        = string
+  default     = ""
+}
