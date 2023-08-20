@@ -1,3 +1,4 @@
+# 前半で requirements.txt を作成、後半でそれを用いて Python アプリケーションの載った Docker Image を作成
 # poetry.lock を読むためには Poetry をインストールする必要がある一方、
 # アプリケーションが載るコンテナには Poetry を入れておく必要がないため、これらを切り離したいという意図
 
@@ -5,12 +6,16 @@
 # Docker のキャッシュ戦略をうまく使うため、一番最初に Poetry をインストール。
 # こうすることで、ビルドのたびに Poetry をインストールする手間が省ける。
 # 次に、pyproject.toml と poetry.lock だけをコピーして、requirements.txt を生成
-FROM python:3.10.12-bullseye-slim as builder
+
+# pyenv localに合わせて3.9.13を指定していますが、ご自由に
+FROM python:3.10.12-slim as builder
 
 WORKDIR /app
 
 RUN pip install poetry
+
 COPY pyproject.toml poetry.lock ./
+
 RUN poetry export --without-hashes -f requirements.txt --output requirements.txt
 
 # 後半
@@ -18,7 +23,7 @@ RUN poetry export --without-hashes -f requirements.txt --output requirements.txt
 # pip コマンドを使ってそれらのパッケージを全てインストール。
 # もしこれらのファイルに変更がない場合はキャッシュが使われて自動で次のレイヤのビルドが行われる。
 # インストールが終わった後に、各種 Python スクリプトを転送して、その他コマンドなどを書いて完成
-FROM python:3.9.13-bullseye-slim
+FROM python:3.10.12-slim
 
 # 環境変数を引数で受け取り、環境変数へ突っ込む
 # dbtのprofiles.ymlで環境毎の接続情報を"outputs"で定義し
