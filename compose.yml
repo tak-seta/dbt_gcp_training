@@ -1,0 +1,5 @@
+services:
+  dbt_workflow_gcp:
+    container_name: dbt_workflow_gcp
+    build:
+      context: .

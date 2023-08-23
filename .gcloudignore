@@ -1,0 +1,8 @@
+.gitignore
+*terraform.*
+.terraform
+target/
+dbt_modules/
+logs/
+**/.DS_Store
+.user.yml
