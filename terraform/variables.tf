@@ -9,6 +9,11 @@ variable "region" {
   default  = "asia-northeast1"
 }
 
+variable "data_source_bucket_name" {
+  type        = string
+  description = "イベントの元データとなるcsvを格納するバケット"
+}
+
 variable "container_image" {
   description = "docker container image"
   type        = string
