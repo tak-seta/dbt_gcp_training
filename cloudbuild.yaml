@@ -5,14 +5,14 @@ steps:
       [
         "build",
         "-t",
-        "us-west2-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform:tag1",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform",
         # "--build-arg",
         # "env=$_ENV",
         "."
       ]
   # GARにpush
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "us-west2-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform:tag1"]
+    args: ["push", "asia-northeast1-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform"]
   # Cloud Run Jobsにデプロイ(定期的にデプロイする都合上updateにしているので事前にコンソールから同名同リージョンのjobを定義しておくと良いです)
   - name: "gcr.io/cloud-builders/gcloud"
     args:
@@ -23,7 +23,7 @@ steps:
         "update",
         "dbt-transform",
         "--image",
-        "us-west2-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform:tag1",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform",
         "--command",
         "bash",
         "--args",
@@ -36,7 +36,7 @@ steps:
         "3600s",
       ]
 images:
-  - "us-west2-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform:tag1"
+  - "asia-northeast1-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform"
 options:
   # Cloud BuildはデフォルトでCloud Storageにビルドログを保存しようとするが、
   # Cloud Loggingだけにするように指定
