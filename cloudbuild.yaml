@@ -6,8 +6,6 @@ steps:
         "build",
         "-t",
         "asia-northeast1-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform",
-        # "--build-arg",
-        # "env=$_ENV",
         "."
       ]
   # GARにpush
@@ -20,20 +18,12 @@ steps:
         "beta",
         "run",
         "jobs",
-        "update",
+        "deploy",
         "dbt-transform",
         "--image",
         "asia-northeast1-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform",
-        "--command",
-        "bash",
-        "--args",
-        "scripts/dbt_build.sh",
         "--region",
-        "asia-northeast1",
-        "--max-retries",
-        "1",
-        "--task-timeout",
-        "3600s",
+        "asia-northeast1"
       ]
 images:
   - "asia-northeast1-docker.pkg.dev/$PROJECT_ID/dbt-docker-repo/dbt-transform"
