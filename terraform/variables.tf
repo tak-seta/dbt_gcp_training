@@ -17,5 +17,4 @@ variable "data_source_bucket_name" {
 variable "container_image" {
   description = "docker container image"
   type        = string
-  default     = ""
 }

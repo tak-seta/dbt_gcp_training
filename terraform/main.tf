@@ -4,6 +4,12 @@ provider "google" {
   region  = var.region
 }
 
+provider "google-beta" {
+  credentials = file("../sa_keyfile.json")
+  project = var.gcp_project_id
+  region  = var.region
+}
+
 terraform {
   required_providers {
     google = {

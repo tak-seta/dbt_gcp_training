@@ -1,12 +1,14 @@
 resource "google_cloud_run_v2_job" "default" {
-  name     = "dbt_transform"
+  provider     = google-beta
+  name     = "dbt-transform"
   location = var.region
+  launch_stage = "BETA"
+
   template {
     template {
       containers {
-        image = var.container_image
+        image = "asia-northeast1-docker.pkg.dev/${var.gcp_project_id}/dbt-docker-repo/${var.container_image}"
       }
-      execution_environment = "EXECUTION_ENVIRONMENT_GEN2"
     }
   }
 }
