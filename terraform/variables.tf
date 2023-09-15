@@ -18,3 +18,10 @@ variable "container_image" {
   description = "docker container image"
   type        = string
 }
+
+variable "dbt_training_roles" {
+  default = [
+    "roles/run.invoker",
+    "roles/storage.objectUser"
+  ]
+}

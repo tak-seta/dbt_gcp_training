@@ -1,6 +1,6 @@
 resource "google_cloud_run_v2_job" "default" {
   provider     = google-beta
-  name     = "dbt-transform"
+  name     = "dbt-transform-job"
   location = var.region
   launch_stage = "BETA"
 
